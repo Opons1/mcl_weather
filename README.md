@@ -1,6 +1,6 @@
 # mcl_weather
 
-Weather mod for Mineclonia. Forked from the `weather_pack` mod by xeranas.
+Weather mod originally for Mineclonia. Forked from the `weather_pack` mod by xeranas, and forked again to make compatible with minetest_game
 
 ## Weathers included
 
@@ -11,12 +11,14 @@ Weather mod for Mineclonia. Forked from the `weather_pack` mod by xeranas.
 ## Commands
 
 `weather <weather>`, requires `weather_manager` privilege.
+`lightning <player|pos>`, requires `weather_manager` privilege.
+
 
 ## Dependencies
 
-Thunder weather requres [lightning](https://github.com/minetest-mods/lightning) mod.
+default in minetest_game
 
-## Configuration prope,  ties
+## Configuration properties
 
 Weather mod for indoor check depends on sunlight propogation check. Some nodes (e.g. glass block) propogates sunlight and thus weather particles will go through it. To change that set `weather_allow_override_nodes=true` in `minetest.conf` file. Be aware that just few nodes will be override and these blocks needs to be re-builded to take effect. Maybe in future other 'cheap' way to check indoor will be available.
 
