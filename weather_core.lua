@@ -53,6 +53,12 @@ core.register_on_shutdown(save_weather)
 local particlespawners={}
 function mcl_weather.add_spawner_player(pl,id,ps)
 	local name=pl:get_player_name()
+	local meta = pl:get_meta()
+
+	if meta:get_int("mcl_weather") == 1 then 
+		return false
+	end
+
 	if not particlespawners[name] then
 		particlespawners[name] = {}
 	end
@@ -311,3 +317,21 @@ local function load_weather()
 end
 
 load_weather()
+
+core.register_chatcommand("toggle_weather_particles", {
+	func = function(name)
+		local player = core.get_player_by_name(name)
+		if player then
+			local meta = player:get_meta()
+			local setting = meta:get_int("mcl_weather")
+			if setting == 1 then
+				meta:set_int("mcl_weather", 0)
+				return "Weather particles and sounds enabled"
+			else
+				meta:set_int("mcl_weather", 1)
+				mcl_weather.remove_spawners_player(player)
+				return "Weather particles and sounds disabled (mostly)"
+			end
+		end
+	end,
+})

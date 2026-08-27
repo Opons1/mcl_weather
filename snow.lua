@@ -31,12 +31,13 @@ local function get_snow_nodebox_collisionbox(layer)
 	return node_box, collision_box
 end
 local snowdef = table.copy(core.registered_nodes["default:snow"])
+snowdef.groups.snow_pilable = 1
 
 --override the first sone
 local nodebox1, collisionbox1 = get_snow_nodebox_collisionbox(1)
 core.override_item("default:snow", {
 	node_box = nodebox1,
-	collison_box = collisionbox1,
+	collision_box = collisionbox1,
 	selection_box = nodebox1,
     on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing and pointed_thing.type == "node" and placer then
@@ -59,6 +60,7 @@ core.override_item("default:snow", {
 		core.item_place(itemstack, placer, pointed_thing)
 		return itemstack
 	end,
+	groups = snowdef.groups,
 })
 --register the rest
 for i = 2, 8 do
@@ -154,23 +156,21 @@ end
 if mcl_weather.allow_abm then
 	core.register_abm({
 		label = "Snow piles up",
-		nodenames = {"group:opaque","group:leaves","group:snow_cover"},
+		nodenames = {"group:opaque","group:leaves","group:snow_cover","group:soil", "group:snow_pilable"},
 		neighbors = {"air"},
-		interval = 27,
-		chance = 33,
+		interval = 100,
+		chance = 4,
 		min_y = -30,
 		action = function(pos, node)
 			local abovehalf = vector.offset(pos,0,0.5,0)
 			if (mcl_weather.state ~= "rain"
 			    and mcl_weather.state ~= "thunder"
-			    and mcl_weather.state ~= "snow")
-				or not mcl_weather.has_snow(abovehalf) then
+			    and mcl_weather.state ~= "snow") then
 				return
 			end
 			local above = vector.offset(pos,0,1,0)
 			local above_node = core.get_node(above)
 			if above_node.name == "air" and mcl_weather.is_outdoor(pos) then
-				local nn = nil
 				if snowdata[node.name] then
 					core.set_node(pos, {name = snowdata[node.name]})
 				else
