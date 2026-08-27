@@ -1,5 +1,5 @@
-local PARTICLES_COUNT_RAIN = 500
-local PARTICLES_COUNT_THUNDER = 900
+local PARTICLES_COUNT_RAIN = 700
+local PARTICLES_COUNT_THUNDER = 1300
 
 mcl_weather.rain = {
 	-- max rain particles created at time
