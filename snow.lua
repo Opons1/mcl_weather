@@ -158,8 +158,8 @@ if mcl_weather.allow_abm then
 		label = "Snow piles up",
 		nodenames = {"group:opaque","group:leaves","group:snow_cover","group:soil", "group:snow_pilable"},
 		neighbors = {"air"},
-		interval = 1,
-		chance = 1,
+		interval = 100,
+		chance = 4,
 		min_y = -30,
 		action = function(pos, node)
 			local abovehalf = vector.offset(pos,0,0.5,0)
