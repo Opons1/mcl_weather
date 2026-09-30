@@ -1,9 +1,9 @@
-local PARTICLES_COUNT_RAIN = 700
-local PARTICLES_COUNT_THUNDER = 1300
+mcl_weather.PARTICLES_COUNT_RAIN = 700
+mcl_weather.PARTICLES_COUNT_THUNDER = 1300
 
 mcl_weather.rain = {
 	-- max rain particles created at time
-	particles_count = PARTICLES_COUNT_RAIN,
+	particles_count = mcl_weather.PARTICLES_COUNT_RAIN,
 
 	-- flag to turn on/off extinguish fire for rain
 	extinguish_fire = true,
@@ -31,7 +31,7 @@ local psdef= {
 	minexptime = 1,
 	maxexptime = 4,
 	minsize = 4,
-	maxsize= 8,
+	maxsize=8,
 	collisiondetection = true,
 	collision_removal = true,
 	vertical = true,
@@ -203,11 +203,11 @@ end
 -- Switch the number of raindrops: "thunder" for many raindrops, otherwise for normal raindrops
 function mcl_weather.rain.set_particles_mode(mode)
 	if mode == "thunder" then
-		psdef.amount=PARTICLES_COUNT_THUNDER
-		mcl_weather.rain.particles_count = PARTICLES_COUNT_THUNDER
+		psdef.amount=mcl_weather.PARTICLES_COUNT_THUNDER
+		mcl_weather.rain.particles_count = mcl_weather.PARTICLES_COUNT_THUNDER
 	else
-		psdef.amount=PARTICLES_COUNT_RAIN
-		mcl_weather.rain.particles_count = PARTICLES_COUNT_RAIN
+		psdef.amount=mcl_weather.PARTICLES_COUNT_RAIN
+		mcl_weather.rain.particles_count = mcl_weather.PARTICLES_COUNT_RAIN
 	end
 end
 
