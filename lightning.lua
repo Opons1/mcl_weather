@@ -141,7 +141,9 @@ function mcl_lightning.strike_func(pos, pos2, objects, for_trap)
 	-- Events caused by the lightning strike: Fire, damage, and skeleton trap spawning
 	pos2.y = pos2.y + 1/2
 	if core.get_item_group(core.get_node({ x = pos2.x, y = pos2.y - 1, z = pos2.z }).name, "liquid") < 1 then
-		core.set_node(pos2, { name = "fire:basic_flame" })
+		if core.get_node(pos).name == "air" then
+			core.set_node(pos2, { name = "fire:basic_flame" })
+		end
 	end
 end
 
