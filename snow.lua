@@ -66,12 +66,13 @@ core.override_item("default:snow", {
 for i = 2, 8 do
 	local name = "mcl_weather:snow" .. i
 	local nodebox, collisionbox = get_snow_nodebox_collisionbox(i)
+	snowdef.drawtype = "nodebox"
 
 	snowdef.node_box = nodebox
 	snowdef.collision_box = collisionbox
 	snowdef.selection_box = nodebox
 	snowdef.drop = "default:snow " .. i
-	core.register_node(name, snowdef)
+	core.register_node(name, table.copy(snowdef))
 end 
 
 local PARTICLES_COUNT_SNOW = 100
